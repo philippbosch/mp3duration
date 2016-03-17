@@ -18,7 +18,7 @@ def hello():
     output = Popen(['ffprobe', '-print_format', 'json', '-show_entries', 'format=duration', '-i', url.replace('&', '\&')], stdout=PIPE).stdout.read()
     data = json.loads(output)
     if 'format' in data:
-        return jsonify({'seconds': data['format']['duration']})
+        return jsonify({'seconds': float(data['format']['duration'])})
     else:
         return jsonify({'error': 'Unable to retrieve file from URL'}), 404
 
